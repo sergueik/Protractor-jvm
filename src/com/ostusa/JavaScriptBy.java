@@ -46,7 +46,7 @@ public class JavaScriptBy extends By
 		scriptArgs[0] = this.RootElement;
 		System.arraycopy(this.Args, 0, scriptArgs, 1, this.Args.length);
 		
-		// Js Excutor
+		// JavaScript Executor
 		JavascriptExecutor jsExecutor = (JavascriptExecutor)arg0;
 		if(jsExecutor == null)
 		{
@@ -62,6 +62,7 @@ public class JavaScriptBy extends By
 			throw new WebDriverException("Could not get an IJavaScriptExecutor instance from the context.");
 		}
 		
+		@SuppressWarnings("unchecked")
 		List<WebElement> elements = (List<WebElement>)jsExecutor.executeScript(this.Script, scriptArgs);
 		if(elements == null)
 		{
