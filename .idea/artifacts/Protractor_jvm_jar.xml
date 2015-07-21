@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Protractor-jvm:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/Protractor_jvm_jar</output-path>
+    <root id="archive" name="Protractor-jvm.jar">
+      <element id="module-output" name="JavaNGDriver" />
+    </root>
+  </artifact>
+</component>
