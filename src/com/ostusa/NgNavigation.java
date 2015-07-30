@@ -42,12 +42,12 @@ public class NgNavigation implements Navigation
 			throw new WebDriverException("URL cannot be null.");
 		}
 		
-		this.NgDriver.navigate().to(arg0.toString());
+		this.Nav.to(arg0.toString());
 	}
 
 	@Override
 	public void to(URL arg0) {
-		this.NgDriver.navigate().to(arg0.toString());
+		this.Nav.to(arg0.toString());
 		
 	}
 	

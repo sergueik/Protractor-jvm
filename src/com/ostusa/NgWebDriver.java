@@ -20,7 +20,14 @@ public class NgWebDriver implements WebDriver, WrapsDriver
 	private String rootElement;
 	private NgModule[] mockModules;
 	public boolean IgnoreSynchronization;
-	
+
+	public NgWebDriver(WebDriver driver)
+	{
+		this.driver = driver;
+		this.jsExecutor = (JavascriptExecutor)driver;
+		this.rootElement = "body";
+	}
+
 	public NgWebDriver(WebDriver driver, NgModule[] mockModules)
 	{
 		this(driver, "body", mockModules);
@@ -125,7 +132,7 @@ public class NgWebDriver implements WebDriver, WrapsDriver
 
 	@Override
 	public Options manage() {
-		this.WaitForAngular();
+		//this.WaitForAngular();
 		return this.driver.manage();
 	}
 
