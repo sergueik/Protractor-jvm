@@ -55,22 +55,22 @@ public class NgDynamicElement implements WebElement
 		
 		if(Binding != null)
 		{
-			rootElement = Driver.findElement(NgBy.Binding(Binding));
+			rootElement = Driver.findElement(NgBy.binding(Binding));
 		}
 		
 		if (Model != null)
 		{
-			rootElement = Driver.findElement(NgBy.Model(Model));
+			rootElement = Driver.findElement(NgBy.model(Model));
 		}
 		
 		if (SelectedOption != null)
 		{
-			rootElement = Driver.findElement(NgBy.SelectedOption(SelectedOption));
+			rootElement = Driver.findElement(NgBy.selectedOption(SelectedOption));
 		}
 		
 		if (Repeater != null)
 		{
-			rootElement = Driver.findElement(NgBy.Repeater(Repeater));
+			rootElement = Driver.findElement(NgBy.repeater(Repeater));
 		}
 		
 		if(rootElement != null)
