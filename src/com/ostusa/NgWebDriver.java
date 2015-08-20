@@ -13,19 +13,26 @@ import org.openqa.selenium.JavascriptExecutor;
 
 public class NgWebDriver implements WebDriver, WrapsDriver
 {
+	@SuppressWarnings("unused")
 	private String AngularDeferBootstrap = "NG_DEFER_BOOTSTRAP!";
 	
 	private WebDriver driver;
 	private JavascriptExecutor jsExecutor;
 	private String rootElement;
+	@SuppressWarnings("unused")
 	private NgModule[] mockModules;
 	public boolean IgnoreSynchronization;
+	// little max iteration count for protector
+	public int MaxIterations;
+	private int iterationCount;
 
 	public NgWebDriver(WebDriver driver)
 	{
 		this.driver = driver;
 		this.jsExecutor = (JavascriptExecutor)driver;
 		this.rootElement = "body";
+		MaxIterations = 30;
+		iterationCount = 0;
 	}
 
 	public NgWebDriver(WebDriver driver, NgModule[] mockModules)
@@ -52,12 +59,10 @@ public class NgWebDriver implements WebDriver, WrapsDriver
 		return this.rootElement;
 	}
 
-	@Override
 	public WebDriver getWrappedDriver() {
 		return this.driver;
 	}
 
-	@Override
 	public void close() {
 		this.driver.close();
 		
@@ -88,66 +93,54 @@ public class NgWebDriver implements WebDriver, WrapsDriver
         return returnElements;
 	}
 
-	@Override
 	public List<WebElement> findElements(By arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.driver.findElements(arg0);
 	}
 
-	@Override
 	public void get(String arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public String getCurrentUrl() {
 		this.WaitForAngular();
 		return this.driver.getCurrentUrl();
 	}
 
-	@Override
 	public String getPageSource() {
 		this.WaitForAngular();
 		return this.driver.getPageSource();
 	}
 
-	@Override
 	public String getTitle() {
 		this.WaitForAngular();
 		return driver.getTitle();
 	}
 
-	@Override
 	public String getWindowHandle() {
 		this.WaitForAngular();
 		return driver.getWindowHandle();
 	}
 
-	@Override
 	public Set<String> getWindowHandles() {
 		this.WaitForAngular();
 		return driver.getWindowHandles();
 	}
 
-	@Override
 	public Options manage() {
 		//this.WaitForAngular();
 		return this.driver.manage();
 	}
 
-	@Override
 	public Navigation navigate() {
 		return new NgNavigation(this, this.driver.navigate());
 	}
 
-	@Override
 	public void quit() {
 		this.driver.quit();
 		
 	}
 
-	@Override
 	public TargetLocator switchTo() {
 		return this.driver.switchTo();
 	}
@@ -156,6 +149,7 @@ public class NgWebDriver implements WebDriver, WrapsDriver
     {
         if (!this.IgnoreSynchronization)
         {
+        	iterationCount++;
             this.jsExecutor.executeAsyncScript(ClientSideScripts.WaitForAngular, this.rootElement);
         }
     }

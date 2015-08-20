@@ -7,22 +7,22 @@ public class NgBy
 {
 	private NgBy() { }
 	
-	public static By Binding(String binding)
+	public static By binding(String binding)
 	{
 		return new JavaScriptBy(ClientSideScripts.FindBindings, binding);
 	}
 	
-	public static By Model(String model)
+	public static By model(String model)
 	{
 		return new JavaScriptBy(ClientSideScripts.FindModel, model);
 	}
 	
-	public static By SelectedOption(String model)
+	public static By selectedOption(String model)
 	{
 		return new JavaScriptBy(ClientSideScripts.FindSelectedOptions, model);
 	}
 	
-	public static By Repeater(String repeat)
+	public static By repeater(String repeat)
 	{
 		return new JavaScriptBy(ClientSideScripts.FindAllRepeaterRows, repeat);
 	}

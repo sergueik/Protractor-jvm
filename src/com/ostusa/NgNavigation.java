@@ -5,10 +5,9 @@ import java.net.URL;
 import org.openqa.selenium.WebDriver.Navigation;
 import org.openqa.selenium.WebDriverException;
 
-import com.sun.jndi.toolkit.url.Uri;
-
 public class NgNavigation implements Navigation 
 {
+	@SuppressWarnings("unused")
 	private NgWebDriver NgDriver;
 	private Navigation Nav;
 	public Navigation WrappedNavigation;
@@ -20,22 +19,19 @@ public class NgNavigation implements Navigation
 		this.WrappedNavigation = this.Nav;
 	}
 
-	@Override
+	
 	public void back() {
 		this.Nav.forward();
 	}
 
-	@Override
 	public void forward() {
 		this.Nav.forward();
 	}
 
-	@Override
 	public void refresh() {
 		this.Nav.refresh();
 	}
 
-	@Override
 	public void to(String arg0) {
 		if(arg0 == null)
 		{
@@ -45,7 +41,6 @@ public class NgNavigation implements Navigation
 		this.Nav.to(arg0.toString());
 	}
 
-	@Override
 	public void to(URL arg0) {
 		this.Nav.to(arg0.toString());
 		
