@@ -2,11 +2,7 @@ package com.ostusa;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 public class NgDynamicElement implements WebElement
 {
@@ -188,9 +184,10 @@ public class NgDynamicElement implements WebElement
 		this.Find();
 		this.rootElement.submit();
 	}
-	
-	
-	
-	
-	
+
+
+	@Override
+	public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
+		return rootElement.getScreenshotAs(target);
+	}
 }

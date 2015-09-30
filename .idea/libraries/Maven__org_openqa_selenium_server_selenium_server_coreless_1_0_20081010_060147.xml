@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.openqa.selenium.server:selenium-server-coreless:1.0-20081010.060147">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openqa/selenium/server/selenium-server-coreless/1.0-20081010.060147/selenium-server-coreless-1.0-20081010.060147.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openqa/selenium/server/selenium-server-coreless/1.0-20081010.060147/selenium-server-coreless-1.0-20081010.060147-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openqa/selenium/server/selenium-server-coreless/1.0-20081010.060147/selenium-server-coreless-1.0-20081010.060147-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

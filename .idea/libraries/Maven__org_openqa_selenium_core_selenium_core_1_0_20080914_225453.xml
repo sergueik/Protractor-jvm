@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.openqa.selenium.core:selenium-core:1.0-20080914.225453">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openqa/selenium/core/selenium-core/1.0-20080914.225453/selenium-core-1.0-20080914.225453.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openqa/selenium/core/selenium-core/1.0-20080914.225453/selenium-core-1.0-20080914.225453-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openqa/selenium/core/selenium-core/1.0-20080914.225453/selenium-core-1.0-20080914.225453-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
