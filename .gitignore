@@ -47,3 +47,4 @@ lib/
 classes/artifacts/
 /target/
 .settings
+.idea/
