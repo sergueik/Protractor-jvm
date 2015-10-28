@@ -50,22 +50,25 @@ public class NgWebElement implements WebElement, WrapsElement
 	
 	public List<NgWebElement> findNgElements(By arg0)
 	{
-		if (arg0 instanceof JavaScriptBy)
-        {
-            ((JavaScriptBy)arg0).RootElement = this.element;
-        }
-		List<WebElement> temp = this.element.findElements(arg0);
-        this.ngDriver.WaitForAngular();
+		
+		List<WebElement> temp = findElements(arg0);
         List<NgWebElement> returnElements = new ArrayList<NgWebElement>();
         for(WebElement currrentEle : temp)
         {
-        	returnElements.add((NgWebElement) currrentEle);
+        	returnElements.add(new NgWebElement(ngDriver, currrentEle));
         }
         return returnElements;
 	}
 
-	public List<WebElement> findElements(By arg0) {
-		return null;
+	public List<WebElement> findElements(By arg0) 
+	{
+		if (arg0 instanceof JavaScriptBy)
+        {
+            ((JavaScriptBy)arg0).RootElement = this.element;
+        }
+		List<WebElement> returnElements = this.element.findElements(arg0);
+        this.ngDriver.WaitForAngular();
+        return returnElements;
 	}
 	
 
@@ -130,5 +133,5 @@ public class NgWebElement implements WebElement, WrapsElement
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

@@ -45,9 +45,14 @@ public class JavaScriptBy extends By
 		
 		scriptArgs[0] = this.RootElement;
 		System.arraycopy(this.Args, 0, scriptArgs, 1, this.Args.length);
+		JavascriptExecutor jsExecutor = null;
 		
 		// JavaScript Executor
-		JavascriptExecutor jsExecutor = (JavascriptExecutor)arg0;
+		if(!(arg0 instanceof WebElement))
+		{
+			jsExecutor = (JavascriptExecutor)arg0;
+		}
+		
 		if(jsExecutor == null)
 		{
 			WrapsDriver wrapsDriver =  (WrapsDriver)arg0;

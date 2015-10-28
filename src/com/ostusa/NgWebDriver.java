@@ -34,6 +34,12 @@ public class NgWebDriver implements WebDriver, WrapsDriver
 		MaxIterations = 30;
 		iterationCount = 0;
 	}
+	
+	public NgWebDriver(WebDriver driver, boolean ignoreSync)
+	{
+		this(driver);
+		this.IgnoreSynchronization = ignoreSync;
+	}
 
 	public NgWebDriver(WebDriver driver, NgModule[] mockModules)
 	{
@@ -71,7 +77,8 @@ public class NgWebDriver implements WebDriver, WrapsDriver
 	public NgWebElement findElement(By arg0)
 	{
 		this.WaitForAngular();
-		return new NgWebElement(this, this.driver.findElement(arg0));
+		NgWebElement tempEle = new NgWebElement(this, this.driver.findElement(arg0));
+		return tempEle;
 	}
 	
 	/*@Override
@@ -88,7 +95,7 @@ public class NgWebDriver implements WebDriver, WrapsDriver
         List<NgWebElement> returnElements = new ArrayList<NgWebElement>();
         for(WebElement currrentEle : temp)
         {
-        	returnElements.add((NgWebElement) currrentEle);
+        	returnElements.add(new NgWebElement(this, currrentEle));
         }
         return returnElements;
 	}
@@ -98,7 +105,8 @@ public class NgWebDriver implements WebDriver, WrapsDriver
 	}
 
 	public void get(String arg0) {
-		// TODO Auto-generated method stub
+		this.WaitForAngular();
+		this.driver.navigate().to(arg0);
 		
 	}
 
