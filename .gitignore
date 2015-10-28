@@ -46,3 +46,4 @@ lib/
 .idea/workspace.xml
 classes/artifacts/
 /target/
+.settings
