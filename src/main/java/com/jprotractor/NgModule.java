@@ -1,4 +1,4 @@
-package com.ostusa;
+package com.jprotractor;
 
 public class NgModule 
 {
