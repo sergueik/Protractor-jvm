@@ -1,8 +1,10 @@
 package com.jprotractor.integration;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.File;
@@ -11,7 +13,15 @@ import java.net.MalformedURLException;
 import java.net.BindException;
 import java.net.URISyntaxException;
 import java.net.URL;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Set;
+
 import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -71,6 +81,10 @@ import com.jprotractor.NgWebElement;
 		execute_script("arguments[0].style.border=''", element);
 	}
 
+	private static void highlight(NgWebElement element, long highlight_interval) throws InterruptedException {
+		highlight(element.getWrappedElement(), highlight_interval);
+	}
+	
 	public static Object execute_script(String script,Object ... args){
 		if (seleniumDriver instanceof JavascriptExecutor) {
 			JavascriptExecutor javascriptExecutor=(JavascriptExecutor)seleniumDriver;
@@ -83,15 +97,15 @@ import com.jprotractor.NgWebElement;
 
 	public static class CalculatorTests{
 
-		public static String baseUrl = "http://juliemr.github.io/protractor-demo/";
    		@Before
-		public void beforeEach() {		    
+		public void beforeEach() {
+			String baseUrl = "http://juliemr.github.io/protractor-demo/";		
 			ngDriver.navigate().to(baseUrl);
 		}
 
 		@Test
 		public void testAddition() throws Exception {
-			WebElement element = ngDriver.findElement(NgBy.model("first"));
+			NgWebElement element = ngDriver.findElement(NgBy.model("first"));
 			assertThat(element,notNullValue());
 			highlight(element, 100);
 			element.sendKeys("40");
@@ -102,14 +116,13 @@ import com.jprotractor.NgWebElement;
 			element = ngDriver.findElement(NgBy.options("value for (key, value) in operators"));
 			assertThat(element,notNullValue());
 			element.click();
-                        element = ngDriver.findElement(NgBy.buttonText("Go"));
+            element = ngDriver.findElement(NgBy.buttonText("Go!"));
 			assertThat(element,notNullValue());
-			element = seleniumDriver.findElement(By.xpath("//button[contains(.,'Go')]"));
-			assertThat(element,notNullValue());
+			assertThat(element.getText(),containsString("Go"));
 			element.click();
 			Thread.sleep(3000);
 			element = ngDriver.findElement(NgBy.binding("latest" )); 
-			assertThat(element,notNullValue());
+			assertThat(element, notNullValue());
 			assertThat(element.getText(), equalTo("42"));
 			highlight(element, 100);
 		}
@@ -120,13 +133,32 @@ import com.jprotractor.NgWebElement;
    		@Before
 		public void beforeEach() throws InterruptedException{
 			ngDriver.navigate().to(baseUrl);
-			Thread.sleep(3000);
 		}
 
 		@Test
-		public void testButtons() throws Exception {
-			WebElement element = ngDriver.findElement(NgBy.buttonText("Customer Login"));
+		public void testCustomerLogin() throws Exception {
+			NgWebElement element = ngDriver.findElement(NgBy.buttonText("Customer Login"));
 			highlight(element, 100);
+			element.click();
+			element = ngDriver.findElement(NgBy.input("custId"));
+			assertThat(element.getAttribute("id"), equalTo("userSelect"));
+			Enumeration<WebElement> elements = Collections.enumeration(ngDriver.findElements(NgBy.repeater("cust in Customers")));
+
+			while (elements.hasMoreElements()){
+				WebElement next_element = elements.nextElement();
+				if (next_element.getText().indexOf("Harry Potter") >= 0 ){
+					System.err.println(next_element.getText());
+					next_element.click();
+				}
+			}
+			NgWebElement login_element = ngDriver.findElement(NgBy.buttonText("Login"));
+			assertTrue(login_element.isEnabled());	
+			login_element.click();			
+			assertThat(ngDriver.findElement(NgBy.binding("user")).getText(),containsString("Harry"));
+			
+			NgWebElement account_number_element = ngDriver.findElement(NgBy.binding("accountNo"));
+			assertThat(account_number_element, notNullValue());
+			assertTrue(account_number_element.getText().matches("^\\d+$"));
 		}
 	}
 }
